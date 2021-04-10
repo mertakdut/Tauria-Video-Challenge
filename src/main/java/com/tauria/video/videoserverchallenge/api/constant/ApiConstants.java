@@ -9,6 +9,7 @@ public final class ApiConstants {
 
   public static final String GATEWAY_BASEURL = "/gateway";
 
+  public static final String USER_BASEURL = "/user";
   private ApiConstants() {
 
   }
