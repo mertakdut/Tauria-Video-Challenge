@@ -10,6 +10,9 @@ public final class ApiConstants {
   public static final String GATEWAY_BASEURL = "/gateway";
 
   public static final String USER_BASEURL = "/user";
+
+  public static final String CONFERENCE_ROOM_BASEURL = "/conference";
+
   private ApiConstants() {
 
   }
