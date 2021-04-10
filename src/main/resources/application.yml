@@ -1,0 +1,16 @@
+server:
+  port: ${port:8080}
+spring:
+  application:
+    name: video-server-challenge
+  h2:
+    console:
+      enabled: true
+gateway:
+  regions:
+    -
+      url: http://localhost:8080
+      name: europe
+    -
+      url: http://localhost:8081
+      name: north-america
