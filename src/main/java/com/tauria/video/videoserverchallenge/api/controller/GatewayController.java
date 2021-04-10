@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+// TODO: Implmement this controller as boot strapping point of the application. Route the appropriate controller with path.
+
 @RestController
 @RequestMapping(value = ApiConstants.GATEWAY_BASEURL,
     produces = {ApiConstants.RESPONSE_CONTENTTYPE},
@@ -34,9 +36,9 @@ public class GatewayController {
   @PutMapping("/region")
   @ResponseStatus(HttpStatus.CREATED)
   public SetCurrentRegionResponse setCurrentRegion(
-      @RequestBody SetCurrentRegionRequest setCurrentRegionRequest) {
+      @RequestBody SetCurrentRegionRequest request) {
     return new SetCurrentRegionResponse(
-        gatewayQueryService.setCurrentRegion(setCurrentRegionRequest.getRegionName()));
+        gatewayQueryService.setCurrentRegion(request.getRegionName()));
   }
 
   @GetMapping("/regions")
