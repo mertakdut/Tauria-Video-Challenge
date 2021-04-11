@@ -1,8 +1,6 @@
 package com.tauria.video.videoserverchallenge.model.response;
 
-// TODO: Mapper is required e.g. ModelMapper, to avoid sending sensitive information as response.
-
-import com.tauria.video.videoserverchallenge.model.persistence.domain.User;
+import com.tauria.video.videoserverchallenge.model.dto.UserResponse;
 import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +8,5 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class GetAllUsersResponse {
-
-  private final List<User> userList;
+  private final List<UserResponse> userList;
 }
