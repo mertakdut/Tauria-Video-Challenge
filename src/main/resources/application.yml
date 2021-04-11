@@ -14,13 +14,3 @@ gateway:
     -
       url: http://localhost:8082
       name: north-america
-  endpoints:
-    -
-      path: '[/]api/user'
-      method: GET
-    -
-      path: '[/]api/user/register'
-      method: POST
-    -
-      path: '[/]api/user/.*/join-team'
-      method: POST

@@ -6,6 +6,7 @@ import com.tauria.video.videoserverchallenge.model.response.GetCurrentRegionResp
 import com.tauria.video.videoserverchallenge.model.response.ListAllRegionsResponse;
 import com.tauria.video.videoserverchallenge.model.response.SetCurrentRegionResponse;
 import com.tauria.video.videoserverchallenge.service.GatewayQueryService;
+import com.tauria.video.videoserverchallenge.utility.GatewayUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,12 +17,14 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.Header;
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +44,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class GatewayController {
 
+  private static final Logger logger = LoggerFactory.getLogger(GatewayController.class);
+
   private final GatewayQueryService gatewayQueryService;
+  private final GatewayUtils gatewayUtils;
 
   private HttpClient httpClient;
 
@@ -78,30 +84,14 @@ public class GatewayController {
       RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE
   })
   @ResponseBody
-  public ResponseEntity<String> proxyRequest(HttpServletRequest request) {
-
+  public ResponseEntity<String> proxyRequest(HttpServletRequest request)
+      throws URISyntaxException, IOException {
+    HttpUriRequest proxiedRequest = gatewayUtils.transformRequest(request);
+    logger.info("request: {}", proxiedRequest);
+    HttpResponse proxiedResponse = httpClient.execute(proxiedRequest);
+    logger.info("Response {}", proxiedResponse);
+    return gatewayUtils.transformResponse(proxiedResponse);
   }
 
-  private HttpHeaders makeResponseHeaders(HttpResponse response) {
-    HttpHeaders result = new HttpHeaders();
-    Header h = response.getFirstHeader("Content-Type");
-    result.set(h.getName(), h.getValue());
-    return result;
-  }
 
-  private HttpUriRequest createHttpUriRequest(HttpServletRequest request) throws URISyntaxException, NoSuchRequestHandlingMethodException, IOException {
-    URLRequestTransformer urlRequestTransformer = new URLRequestTransformer(apiGatewayProperties);
-    ContentRequestTransformer contentRequestTransformer = new ContentRequestTransformer();
-    HeadersRequestTransformer headersRequestTransformer = new HeadersRequestTransformer();
-    headersRequestTransformer.setPredecessor(contentRequestTransformer);
-    contentRequestTransformer.setPredecessor(urlRequestTransformer);
-
-    return headersRequestTransformer.transform(request).build();
-  }
-
-  private String read(InputStream input) throws IOException {
-    try (BufferedReader buffer = new BufferedReader(new InputStreamReader(input))) {
-      return buffer.lines().collect(Collectors.joining("\n"));
-    }
-  }
 }
