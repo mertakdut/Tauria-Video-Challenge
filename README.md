@@ -13,4 +13,7 @@ Api Gateway: SERVER_PORT=8080
 Region Europe: SERVER_PORT=8081
 Region North-America: SERVER_PORT=8082
 
+Answer to question3:
+/check-conference-time-exceeded
+
 Postman Collection: Video Tauria Challenge.postman_collection.json

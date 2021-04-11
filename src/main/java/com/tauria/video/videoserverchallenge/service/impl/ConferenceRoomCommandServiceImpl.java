@@ -75,4 +75,10 @@ public class ConferenceRoomCommandServiceImpl implements ConferenceRoomCommandSe
 
     return conferenceRoomRepository.save(conferenceRoom);
   }
+
+  @Override
+  public boolean checkTotalConferenceTimeExceeded(Long id, int seconds) {
+    ConferenceRoom conferenceRoom = conferenceRoomQueryService.getById(id);
+    return seconds > conferenceRoom.getTotalConferenceTimeInSeconds();
+  }
 }

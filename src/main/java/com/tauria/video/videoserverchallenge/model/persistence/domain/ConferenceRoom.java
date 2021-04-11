@@ -49,6 +49,8 @@ public class ConferenceRoom {
       inverseJoinColumns = @JoinColumn(name = "conference_room_id", referencedColumnName = "id"))
   private Set<User> usersInside;
 
+  private int totalConferenceTimeInSeconds;
+
   private boolean allowGuests;
 
   public ConferenceRoom() {
@@ -61,5 +63,6 @@ public class ConferenceRoom {
     this.requiredAttendees = requiredAttendees;
     this.optionalAttendees = optionalAttendees;
     this.allowGuests = allowGuests;
+    this.totalConferenceTimeInSeconds = 100 * 60 * 60;
   }
 }

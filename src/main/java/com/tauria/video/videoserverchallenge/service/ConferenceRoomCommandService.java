@@ -11,4 +11,6 @@ public interface ConferenceRoomCommandService {
   ConferenceRoom join(Long id, Long userId);
 
   ConferenceRoom leave(Long id, Long userId);
+
+  boolean checkTotalConferenceTimeExceeded(Long id, int seconds);
 }

@@ -2,9 +2,11 @@ package com.tauria.video.videoserverchallenge.api.controller;
 
 import com.tauria.video.videoserverchallenge.api.constant.ApiConstants;
 import com.tauria.video.videoserverchallenge.model.dto.ConferenceRoomResponse;
+import com.tauria.video.videoserverchallenge.model.request.CheckTotalConferenceTimeExceededRequest;
 import com.tauria.video.videoserverchallenge.model.request.CreateConferenceRoomRequest;
 import com.tauria.video.videoserverchallenge.model.request.JoinConferenceRoomRequest;
 import com.tauria.video.videoserverchallenge.model.request.LeaveConferenceRoomRequest;
+import com.tauria.video.videoserverchallenge.model.response.CheckTotalConferenceTimeExceededResponse;
 import com.tauria.video.videoserverchallenge.model.response.CreateConferenceRoomResponse;
 import com.tauria.video.videoserverchallenge.model.response.GetAllConferenceRoomsResponse;
 import com.tauria.video.videoserverchallenge.model.response.JoinConferenceRoomResponse;
@@ -37,7 +39,7 @@ public class ConferenceRoomController {
   private final ConversionService conversionService;
 
   @GetMapping
-  @ResponseStatus(HttpStatus.CREATED)
+  @ResponseStatus(HttpStatus.OK)
   public GetAllConferenceRoomsResponse getAll() {
     return new GetAllConferenceRoomsResponse(
         conferenceRoomQueryService.getAll().stream()
@@ -46,6 +48,19 @@ public class ConferenceRoomController {
             .collect(Collectors.toList())
     );
   }
+
+  @GetMapping("/check-conference-time-exceeded")
+  @ResponseStatus(HttpStatus.OK)
+  public CheckTotalConferenceTimeExceededResponse checkTotalConferenceTimeExceeded(
+      @RequestBody CheckTotalConferenceTimeExceededRequest request) {
+    return new CheckTotalConferenceTimeExceededResponse(
+        conferenceRoomCommandService.checkTotalConferenceTimeExceeded(
+            request.getConferenceRoomId(),
+            request.getTotalConferenceTime()
+        )
+    );
+  }
+
 
   @PostMapping("/create")
   @ResponseStatus(HttpStatus.CREATED)
