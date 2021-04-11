@@ -7,5 +7,5 @@ public interface ConferenceRoomQueryService {
 
   List<ConferenceRoom> getAll();
 
-  ConferenceRoom getById(String id);
+  ConferenceRoom getById(Long id);
 }

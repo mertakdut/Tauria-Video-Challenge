@@ -7,11 +7,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Table(
+    name = "users",
+    uniqueConstraints =
+    @UniqueConstraint(columnNames = {"username"})
+)
 @Getter
 @Setter
 public class User {
@@ -36,6 +43,9 @@ public class User {
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "team_id"))
   private Set<Team> teamsEnrolled;
+
+  public User() {
+  }
 
   public User(String firstName, String lastName, String username, String password) {
     this.firstName = firstName;

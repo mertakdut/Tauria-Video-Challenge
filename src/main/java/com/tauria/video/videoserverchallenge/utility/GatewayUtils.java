@@ -1,5 +1,6 @@
 package com.tauria.video.videoserverchallenge.utility;
 
+import com.tauria.video.videoserverchallenge.api.constant.ApiConstants;
 import com.tauria.video.videoserverchallenge.service.GatewayQueryService;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -78,7 +79,8 @@ public class GatewayUtils {
   }
 
   private String getServiceUrl(HttpServletRequest request) {
-    return gatewayQueryService.getCurrentRegion().getUrl() + request.getRequestURI();
+    return gatewayQueryService.getCurrentRegion().getUrl() + request.getRequestURI().substring(
+        ApiConstants.GATEWAY_BASEURL.length());
   }
 
   private HttpHeaders makeResponseHeaders(HttpResponse response) {

@@ -7,16 +7,11 @@ import com.tauria.video.videoserverchallenge.model.response.ListAllRegionsRespon
 import com.tauria.video.videoserverchallenge.model.response.SetCurrentRegionResponse;
 import com.tauria.video.videoserverchallenge.service.GatewayQueryService;
 import com.tauria.video.videoserverchallenge.utility.GatewayUtils;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -24,7 +19,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -80,7 +74,7 @@ public class GatewayController {
     return new ListAllRegionsResponse(gatewayQueryService.listAllRegions());
   }
 
-  @RequestMapping(value = "/api/**", method = {
+  @RequestMapping(value = "/**", method = {
       RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE
   })
   @ResponseBody

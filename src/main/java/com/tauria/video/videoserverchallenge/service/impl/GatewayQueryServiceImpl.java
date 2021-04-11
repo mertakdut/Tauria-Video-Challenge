@@ -30,7 +30,7 @@ public class GatewayQueryServiceImpl implements GatewayQueryService {
   public Region setCurrentRegion(String regionName) {
     currentRegion = this.getAllRegionsFromProperties().stream()
         .filter(region -> region.getName().equals(regionName))
-        .findFirst().orElse(null);
+        .findFirst().orElse(getCurrentRegion());
     return currentRegion;
   }
 
