@@ -3,8 +3,10 @@ package com.tauria.video.videoserverchallenge.model.persistence.domain;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +17,7 @@ import lombok.Setter;
 public class Team {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @NotNull
@@ -23,4 +25,7 @@ public class Team {
 
   @ManyToMany(mappedBy = "teamsEnrolled")
   private Set<User> enrolledUsers;
+
+  @OneToOne
+  private ConferenceRoom asOwner;
 }

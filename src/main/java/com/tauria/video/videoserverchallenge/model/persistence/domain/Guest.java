@@ -1,5 +1,6 @@
 package com.tauria.video.videoserverchallenge.model.persistence.domain;
 
+import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ import lombok.Setter;
 public class Guest {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @NotNull

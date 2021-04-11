@@ -19,7 +19,6 @@ public class UserCommandServiceImpl implements UserCommandService {
   private final UserQueryService userQueryService;
   private final TeamQueryService teamQueryService;
   private final UserRepository userRepository;
-  private final TeamRepository teamRepository;
   private final PasswordUtils passwordUtils;
 
   @Override
@@ -36,16 +35,8 @@ public class UserCommandServiceImpl implements UserCommandService {
     Set<Team> enrolledTeams = user.getTeamsEnrolled();
     enrolledTeams.add(team);
 
-    Set<User> usersEnrolled = team.getEnrolledUsers();
-    usersEnrolled.add(user);
-
     user.setTeamsEnrolled(enrolledTeams);
-    team.setEnrolledUsers(usersEnrolled);
 
-    // TODO: Think transactional
-    User savedUser = userRepository.save(user);
-    teamRepository.save(team);
-
-    return savedUser;
+    return userRepository.save(user);
   }
 }
