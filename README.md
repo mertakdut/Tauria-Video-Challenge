@@ -1,7 +1,7 @@
 # Tauria-Video-Challenge
 Tauria Video Server Challenge with Spring Boot
 
-Answer to question1 and question3:
+Answer to question1:
 
 Check package: com.tauria.video.videoserverchallenge.model.persistence.domain;
 
