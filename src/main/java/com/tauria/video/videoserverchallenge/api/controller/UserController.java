@@ -30,7 +30,7 @@ public class UserController {
   private final UserQueryService userQueryService;
   private final UserCommandService userCommandService;
 
-  @GetMapping()
+  @GetMapping
   @ResponseStatus(HttpStatus.OK)
   public GetAllUsersResponse getAll() {
     return new GetAllUsersResponse(userQueryService.getAll());

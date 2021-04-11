@@ -7,11 +7,13 @@ public final class ApiConstants {
   public static final String RESPONSE_CONTENTTYPE =
       MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8";
 
+  public static final String API_URL_PREFIX = "/api";
+
   public static final String GATEWAY_BASEURL = "/gateway";
 
-  public static final String USER_BASEURL = "/user";
+  public static final String USER_BASEURL = API_URL_PREFIX + "/user";
 
-  public static final String CONFERENCE_ROOM_BASEURL = "/conference";
+  public static final String CONFERENCE_ROOM_BASEURL = API_URL_PREFIX + "/conference";
 
   private ApiConstants() {
 

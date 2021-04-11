@@ -1,5 +1,6 @@
 package com.tauria.video.videoserverchallenge.service.impl;
 
+import com.tauria.video.videoserverchallenge.model.Endpoint;
 import com.tauria.video.videoserverchallenge.model.Region;
 import com.tauria.video.videoserverchallenge.properties.GatewayProperties;
 import com.tauria.video.videoserverchallenge.service.GatewayQueryService;
@@ -17,6 +18,11 @@ public class GatewayQueryServiceImpl implements GatewayQueryService {
   @Override
   public List<Region> listAllRegions() {
     return this.getAllRegionsFromProperties();
+  }
+
+  @Override
+  public List<Endpoint> listAllEndpoints() {
+    return gatewayProperties.getEndpoints();
   }
 
   public Region getCurrentRegion() {

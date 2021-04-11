@@ -1,5 +1,5 @@
 server:
-  port: ${port:8080}
+  port: ${SERVER_PORT:8080}
 spring:
   application:
     name: video-server-challenge
@@ -9,8 +9,18 @@ spring:
 gateway:
   regions:
     -
-      url: http://localhost:8080
+      url: http://localhost:8081
       name: europe
     -
-      url: http://localhost:8081
+      url: http://localhost:8082
       name: north-america
+  endpoints:
+    -
+      path: '[/]api/user'
+      method: GET
+    -
+      path: '[/]api/user/register'
+      method: POST
+    -
+      path: '[/]api/user/.*/join-team'
+      method: POST

@@ -1,5 +1,6 @@
 package com.tauria.video.videoserverchallenge.properties;
 
+import com.tauria.video.videoserverchallenge.model.Endpoint;
 import com.tauria.video.videoserverchallenge.model.Region;
 import java.util.List;
 import lombok.Getter;
@@ -12,6 +13,6 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "gateway")
 @Component
 public class GatewayProperties {
-
   private List<Region> regions;
+  private List<Endpoint> endpoints;
 }
