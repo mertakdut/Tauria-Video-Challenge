@@ -8,5 +8,7 @@ public interface ConferenceRoomCommandService {
   ConferenceRoom create(Long userId, List<Long> requiredAttendeesIdList,
       List<Long> optionalAttendeesIdList, boolean allowGuests);
 
-  boolean join(Long id, Long userId);
+  ConferenceRoom join(Long id, Long userId);
+
+  ConferenceRoom leave(Long id, Long userId);
 }

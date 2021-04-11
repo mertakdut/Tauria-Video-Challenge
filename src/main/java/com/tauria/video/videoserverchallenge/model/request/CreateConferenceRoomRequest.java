@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class CreateConferenceRoomRequest {
-  private Long userId;
+  private Long creatorId;
   private List<Long> requiredAttendeesIdList;
   private List<Long> optionalAttendeesIdList;
   private boolean allowGuests;

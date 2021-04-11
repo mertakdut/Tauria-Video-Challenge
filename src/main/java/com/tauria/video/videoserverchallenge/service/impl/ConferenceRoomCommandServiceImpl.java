@@ -27,11 +27,16 @@ public class ConferenceRoomCommandServiceImpl implements ConferenceRoomCommandSe
     User user = userQueryService.getById(userId);
 
     if (user == null) {
-      throw new RuntimeException(
-          "Only users can create conference rooms."); // TODO: Custom business logic exception class.
+      // TODO: Custom business logic exception class.
+      throw new RuntimeException("Only users can create conference rooms.");
     }
 
-    Team owner = user.getTeamsEnrolled().iterator().next();
+    Team owner = null;
+
+    if (user.getTeamsEnrolled() != null && !user.getTeamsEnrolled().isEmpty()) {
+      owner = user.getTeamsEnrolled().iterator().next();
+    }
+
     Set<User> requiredAttendees = new HashSet<>(
         userQueryService.findAllByIds(requiredAttendeesIdList));
     Set<User> optionalAttendees = new HashSet<>(
@@ -42,16 +47,32 @@ public class ConferenceRoomCommandServiceImpl implements ConferenceRoomCommandSe
   }
 
   @Override
-  public boolean join(Long id, Long userId) {
+  public ConferenceRoom join(Long id, Long userId) {
     ConferenceRoom conferenceRoom = conferenceRoomQueryService.getById(id);
     if (!conferenceRoom.isAllowGuests()) {
       User attemptingUser = userQueryService.getById(userId);
       if (attemptingUser == null) {
-        throw new RuntimeException(
-            "Only users can join this conference room."); // TODO: Custom business logic exception class.
+        // TODO: Custom business logic exception class.
+        throw new RuntimeException("Only users can join this conference room.");
       }
+
+      Set<User> insideUsers = conferenceRoom.getUsersInside();
+      insideUsers.add(attemptingUser);
+      conferenceRoom.setUsersInside(insideUsers);
+
+      conferenceRoom = conferenceRoomRepository.save(conferenceRoom);
     }
 
-    return true;
+    return conferenceRoom;
+  }
+
+  @Override
+  public ConferenceRoom leave(Long id, Long userId) {
+    ConferenceRoom conferenceRoom = conferenceRoomQueryService.getById(id);
+    User leaver = conferenceRoom.getUsersInside().stream().filter(user -> user.getId().equals(id))
+        .findFirst().orElse(null);
+    conferenceRoom.getUsersInside().remove(leaver);
+
+    return conferenceRoomRepository.save(conferenceRoom);
   }
 }
