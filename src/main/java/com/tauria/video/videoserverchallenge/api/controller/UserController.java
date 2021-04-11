@@ -38,7 +38,7 @@ public class UserController {
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public GetUserByIdResponse getById(@PathVariable("id") String id) {
+  public GetUserByIdResponse getById(@PathVariable("id") Long id) {
     return new GetUserByIdResponse(userQueryService.getById(id));
   }
 
@@ -46,13 +46,13 @@ public class UserController {
   @ResponseStatus(HttpStatus.CREATED)
   public RegisterUserResponse register(@RequestBody RegisterUserRequest request) {
     return new RegisterUserResponse(userCommandService
-        .save(request.getFirstname(), request.getLastname(), request.getUsername(),
+        .save(request.getFirstName(), request.getLastName(), request.getUsername(),
             request.getPassword()));
   }
 
   @PostMapping("/{id}/join-team")
   @ResponseStatus(HttpStatus.OK)
-  public JoinTeamResponse joinTeam(@PathVariable("id") String id,
+  public JoinTeamResponse joinTeam(@PathVariable("id") Long id,
       @RequestBody JoinTeamRequest joinTeamRequest) {
     return new JoinTeamResponse(userCommandService.joinTeam(id, joinTeamRequest.getTeamId()));
   }

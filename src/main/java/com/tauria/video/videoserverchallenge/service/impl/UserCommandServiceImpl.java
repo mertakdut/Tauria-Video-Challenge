@@ -29,7 +29,7 @@ public class UserCommandServiceImpl implements UserCommandService {
   }
 
   @Override
-  public User joinTeam(String id, String teamId) {
+  public User joinTeam(Long id, Long teamId) {
     User user = userQueryService.getById(id);
     Team team = teamQueryService.getById(teamId);
 

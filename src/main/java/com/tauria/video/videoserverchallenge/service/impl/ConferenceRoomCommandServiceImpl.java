@@ -22,8 +22,8 @@ public class ConferenceRoomCommandServiceImpl implements ConferenceRoomCommandSe
   private final ConferenceRoomRepository conferenceRoomRepository;
 
   @Override
-  public ConferenceRoom create(String userId, List<String> requiredAttendeesIdList,
-      List<String> optionalAttendeesIdList, boolean allowGuests) {
+  public ConferenceRoom create(Long userId, List<Long> requiredAttendeesIdList,
+      List<Long> optionalAttendeesIdList, boolean allowGuests) {
     User user = userQueryService.getById(userId);
 
     if (user == null) {
@@ -42,7 +42,7 @@ public class ConferenceRoomCommandServiceImpl implements ConferenceRoomCommandSe
   }
 
   @Override
-  public boolean join(String id, String userId) {
+  public boolean join(Long id, Long userId) {
     ConferenceRoom conferenceRoom = conferenceRoomQueryService.getById(id);
     if (!conferenceRoom.isAllowGuests()) {
       User attemptingUser = userQueryService.getById(userId);

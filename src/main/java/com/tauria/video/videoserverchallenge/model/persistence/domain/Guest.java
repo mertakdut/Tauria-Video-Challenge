@@ -14,7 +14,7 @@ public class Guest {
 
   @Id
   @GeneratedValue
-  private String id;
+  private Long id;
 
   @NotNull
   private String firstname;

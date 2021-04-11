@@ -36,7 +36,7 @@ public class ConferenceRoomController {
 
   @PostMapping("/{id}/join")
   @ResponseStatus(HttpStatus.OK)
-  public JoinConferenceRoomResponse join(@PathVariable("id") String id,
+  public JoinConferenceRoomResponse join(@PathVariable("id") Long id,
       @RequestBody JoinConferenceRoomRequest request) {
     return new JoinConferenceRoomResponse(
         conferenceRoomCommandService.join(id, request.getUserId()));

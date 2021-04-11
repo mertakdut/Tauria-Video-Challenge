@@ -7,7 +7,7 @@ public interface UserQueryService {
 
   List<User> getAll();
 
-  User getById(String id);
+  User getById(Long id);
 
-  List<User> findAllByIds(List<String> ids);
+  List<User> findAllByIds(List<Long> ids);
 }

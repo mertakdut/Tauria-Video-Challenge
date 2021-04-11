@@ -19,12 +19,12 @@ public class UserQueryServiceImpl implements UserQueryService {
   }
 
   @Override
-  public User getById(String id) {
+  public User getById(Long id) {
     return userRepository.findById(id).orElse(null);
   }
 
   @Override
-  public List<User> findAllByIds(List<String> ids) {
+  public List<User> findAllByIds(List<Long> ids) {
     return userRepository.findAllById(ids);
   }
 }

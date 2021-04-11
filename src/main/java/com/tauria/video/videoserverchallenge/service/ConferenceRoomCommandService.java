@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface ConferenceRoomCommandService {
 
-  ConferenceRoom create(String userId, List<String> requiredAttendeesIdList,
-      List<String> optionalAttendeesIdList, boolean allowGuests);
+  ConferenceRoom create(Long userId, List<Long> requiredAttendeesIdList,
+      List<Long> optionalAttendeesIdList, boolean allowGuests);
 
-  boolean join(String id, String userId);
+  boolean join(Long id, Long userId);
 }

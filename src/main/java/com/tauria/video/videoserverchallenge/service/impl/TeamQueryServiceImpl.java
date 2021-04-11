@@ -19,7 +19,7 @@ public class TeamQueryServiceImpl implements TeamQueryService {
   }
 
   @Override
-  public Team getById(String id) {
+  public Team getById(Long id) {
     return teamRepository.findById(id).orElse(
         null); // TODO: Custom exception with RestErrorHandler: EntityNotFound or TeamNotFound
   }

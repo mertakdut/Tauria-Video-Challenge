@@ -19,7 +19,7 @@ public class ConferenceRoomQueryServiceImpl implements ConferenceRoomQueryServic
   }
 
   @Override
-  public ConferenceRoom getById(String id) {
+  public ConferenceRoom getById(Long id) {
     return conferenceRoomRepository.findById(id).orElse(null);
   }
 }

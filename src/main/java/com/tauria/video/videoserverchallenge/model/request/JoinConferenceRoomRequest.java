@@ -4,6 +4,5 @@ import lombok.Getter;
 
 @Getter
 public class JoinConferenceRoomRequest {
-
-  private String userId;
+  private Long userId;
 }

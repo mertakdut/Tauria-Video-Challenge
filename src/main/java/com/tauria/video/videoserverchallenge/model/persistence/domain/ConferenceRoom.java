@@ -16,7 +16,7 @@ public class ConferenceRoom {
 
   @Id
   @GeneratedValue
-  private String id;
+  private Long id;
 
   @ManyToOne
   private User createdBy;

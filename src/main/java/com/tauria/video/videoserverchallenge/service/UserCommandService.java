@@ -6,5 +6,5 @@ public interface UserCommandService {
 
   User save(String firstName, String lastName, String username, String password);
 
-  User joinTeam(String id, String teamId);
+  User joinTeam(Long id, Long teamId);
 }
